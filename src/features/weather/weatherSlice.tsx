@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getAsyncWeather = createAsyncThunk(
     'weather/getAsync',
     async () => {
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Bangkok&appid=${process.env.OPEN_WEATHER_ACCESS_KEY}`);
+        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Bangkok&appid=${process.env.REACT_APP_OPEN_WEATHER_ACCESS_KEY}`);
         return response.data;
     }
 );
@@ -40,11 +40,15 @@ const weatherSlice = createSlice({
 });
 
 interface State {
-    weather: {},
-    isLoading: boolean,
-    hasError: boolean
+    weather: {
+        weather: {
+            base?: string
+        },
+        isLoading: boolean,
+        hasError: boolean 
+    }
 }
 
-export const selectBackgrounds = (state: State) => state;
+export const selectWeather = (state: State) => state.weather;
 export const { addWeather } = weatherSlice.actions;
 export default weatherSlice.reducer;

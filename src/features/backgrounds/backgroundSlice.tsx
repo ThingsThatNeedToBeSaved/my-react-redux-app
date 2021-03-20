@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getAsyncBackgrounds = createAsyncThunk(
     'background/getAsync',
     async () => {
-        const response = await axios.get(`https://api.unsplash.com/photos/random/?client_id=${process.env.UNSPLASH_ACCESS_KEY}&orientation=landscape&count=5`);
+        const response = await axios.get(`https://api.unsplash.com/photos/random/?client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}&orientation=landscape&count=5`);
         return response.data;
     }
 );
@@ -40,11 +40,13 @@ const backgroundSlice = createSlice({
 });
 
 interface State {
-    backgrounds: string[],
-    isLoading: boolean,
-    hasError: boolean
+    background: {
+        backgrounds: string[],
+        isLoading: boolean,
+        hasError: boolean
+    }
 }
 
-export const selectBackgrounds = (state: State) => state;
+export const selectBackgrounds = (state: State) => state.background;
 export const { addBackground } = backgroundSlice.actions;
 export default backgroundSlice.reducer;

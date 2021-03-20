@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios'; 
 
 export const getAsyncQuote = createAsyncThunk(
-    'quotes/getAsync',
+    'quote/getAsync',
     async () => {
         const response = await axios.get(`https://quotes.rest/qod`);
         return response.data;
@@ -12,7 +12,7 @@ export const getAsyncQuote = createAsyncThunk(
 const quoteSlice = createSlice({
     name: 'quote',
     initialState: {
-        quote: '',
+        quote: {},
         isLoading: false,
         hasError: false
     },
@@ -40,11 +40,15 @@ const quoteSlice = createSlice({
 });
 
 interface State {
-    quotes: string,
-    isLoading: boolean,
-    hasError: boolean
+    quote: {
+        quote: {
+            contents: {}
+        },
+        isLoading: boolean,
+        hasError: boolean
+    }
 }
 
-export const selectQuote = (state: State) => state;
+export const selectQuote = (state: State) => state.quote;
 export const { addQuote } = quoteSlice.actions;
 export default quoteSlice.reducer;

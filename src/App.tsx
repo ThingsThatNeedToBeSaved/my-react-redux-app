@@ -1,56 +1,61 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAsyncBackgrounds, selectBackgrounds } from './features/backgrounds/backgroundSlice';
+import { getAsyncQuote, selectQuote } from './features/quote/quoteSlice';
+import { getAsyncWeather, selectWeather } from './features/weather/weatherSlice';
 
 function App() {
+  const backgrounds = useSelector(selectBackgrounds);
+  const quote = useSelector(selectQuote);
+  const weather = useSelector(selectWeather);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(!backgrounds.backgrounds[0]) {
+      dispatch(getAsyncBackgrounds());
+    }
+    if(!quote.quote.contents) {
+      dispatch(getAsyncQuote());
+    }
+    if (!weather.weather.base) {
+      dispatch(getAsyncWeather());
+    }
+    
+  },[]);
+
+  console.log(backgrounds);
+  console.log(quote);
+  console.log(weather);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <img src="..." className="d-block w-100" alt="background 1" />
+          </div>
+          <div className="carousel-item">
+            <img src="..." className="d-block w-100" alt="background 2" />
+          </div>
+          <div className="carousel-item">
+            <img src="..." className="d-block w-100" alt="background 3" />
+          </div>
+          <div className="carousel-item">
+            <img src="..." className="d-block w-100" alt="background 4" />
+          </div>
+          <div className="carousel-item">
+            <img src="..." className="d-block w-100" alt="background 5" />
+          </div>
+        </div>
+        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
   );
 }
