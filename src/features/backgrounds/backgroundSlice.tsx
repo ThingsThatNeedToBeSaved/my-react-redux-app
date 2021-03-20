@@ -12,13 +12,13 @@ export const getAsyncBackgrounds = createAsyncThunk(
 const backgroundSlice = createSlice({
     name: 'background',
     initialState: {
-        backgrounds: [] as string[],
+        backgrounds: {},
         isLoading: false,
         hasError: false
     },
     reducers: {
         addBackground: (state, action) => {
-            state.backgrounds.push(action.payload);
+            state.backgrounds = action.payload;
         }
     },
     extraReducers: {
@@ -29,7 +29,7 @@ const backgroundSlice = createSlice({
         ['background/getAsync/fulfilled']: (state,action) => {
             state.isLoading = false;
             state.hasError = false;
-            state.backgrounds.push(action.payload);
+            state.backgrounds = action.payload;
         },
         ['background/getAsync/rejected']: (state,action) => {
             state.isLoading = false;
@@ -41,7 +41,14 @@ const backgroundSlice = createSlice({
 
 interface State {
     background: {
-        backgrounds: string[],
+        backgrounds: {
+            [x : number]: {
+                urls: {
+                    regular: string
+                },
+                alt_description: string
+            }
+        },
         isLoading: boolean,
         hasError: boolean
     }
