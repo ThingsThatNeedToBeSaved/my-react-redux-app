@@ -17,7 +17,7 @@ export default function Weather() {
         <React.Fragment>
             {weather.weather.base ? (
                 <div className="weather position-absolute bg-secondary w-25 rounded d-flex" style={{opacity: 0.8, top: '3rem', right: '12rem', zIndex: 100}}>
-                    <img src={`http://openweathermap.org/img/wn/${weather.weather.weather[0].icon}@2x.png`} />
+                    <img src={`http://openweathermap.org/img/wn/${weather.weather.weather[0].icon}@2x.png`} alt="Current Weather Icon" />
                     <div className="weather-info d-flex flex-column justify-content-center mb-2 ms-2">
                         <span className="text-white fs-3">{weather.weather.weather[0].main}</span>
                         <span className="text-white fs-5">{weather.weather.weather[0].description}</span>
