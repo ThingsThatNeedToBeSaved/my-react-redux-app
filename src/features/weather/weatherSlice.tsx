@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getAsyncWeather = createAsyncThunk(
     'weather/getAsync',
     async () => {
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Bangkok&appid=${process.env.REACT_APP_OPEN_WEATHER_ACCESS_KEY}`);
+        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Bangkok&appid=${process.env.REACT_APP_OPEN_WEATHER_ACCESS_KEY}&units=metric`);
         return response.data;
     }
 );
@@ -42,7 +42,18 @@ const weatherSlice = createSlice({
 interface State {
     weather: {
         weather: {
-            base?: string
+            base?: string,
+            weather: {
+                [x : number]: {
+                    main: string,
+                    description: string,
+                    icon: string
+                }
+            }
+            main: {
+                temp: number,
+                humidity: number
+            }
         },
         isLoading: boolean,
         hasError: boolean 

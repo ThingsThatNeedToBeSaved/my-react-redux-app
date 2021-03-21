@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Spinner from '../../helpers/Spinner';
 import { getAsyncBackgrounds, selectBackgrounds } from './backgroundSlice';
 
 export default function Background() {
@@ -42,7 +43,9 @@ export default function Background() {
                     <span className="visually-hidden">Next</span>
                 </button>
                 </div>
-            ) : null}
+            ) : (
+                <Spinner/>
+            )}
         </React.Fragment>
     )
 }
