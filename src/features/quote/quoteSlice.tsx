@@ -42,7 +42,14 @@ const quoteSlice = createSlice({
 interface State {
     quote: {
         quote: {
-            contents: {}
+            contents: {
+                quotes: {
+                    [y : number]: {
+                        quote: string,
+                        author: string
+                    }
+                }
+            }
         },
         isLoading: boolean,
         hasError: boolean
