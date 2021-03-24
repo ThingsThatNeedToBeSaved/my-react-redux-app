@@ -11,46 +11,50 @@ export default function Todos() {
 
     const handleChange = (event: any) => {
         setNewTodo(event.target.value);
-    }
+    };
 
     interface Todo {
         id: number,
         title: string,
         isDone: boolean
-    }
+    };
 
     const handleDone = (todo : Todo) => {
         const alreadyDoneTodo = {
             id: todo.id,
             title: todo.title,
-            isDone: true
-        }
+            isDone: !todo.isDone
+        };
+
         dispatch(doneTodo(alreadyDoneTodo));
-    }
+    };
 
     const handleRemove = (todo : Todo) => {
         dispatch(removeTodo(todo))
-    }
+    };
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
+        const lastTodo = todos.todos.length - 1;
+        const newId = todos.todos[lastTodo].id + 1;
 
         const createdNewTodo = {
-            id: 0,
+            id: newId,
             title: newTodo,
             isDone: false
-        }
+        };
+
         dispatch(addTodo(createdNewTodo));
-        setNewTodo("");
-    }
+        setNewTodo(""); 
+    };
     
     return (
         <React.Fragment>
             <div className="w-50 position-absolute top-50 start-50 translate-middle" style={{zIndex: 100,opacity: 0.9}}>
-                    <div className="card-header bg-secondary">
+                    <div className="row card-header bg-secondary">
                         <h3 className="text-center text-white p-2">Things that need to be done!</h3>
                     </div>
-                    <div className="card-body bg-secondary">
+                    <div className="row card-body bg-secondary">
                         <form onSubmit={handleSubmit} className="card-item d-flex justify-content-center">
                             <input className="fs-4 px-2 py-1 w-75 border-0 rounded-start" value={newTodo} onChange={handleChange}/>            
                             <button className="btn-primary border-0 rounded-end" type="submit">
@@ -61,14 +65,14 @@ export default function Todos() {
                             </button>
                         </form>
                     </div>
-                    <div className="card-footer bg-secondary d-flex justify-content-evenly">
-                        {todos.todos[0] ? (
+                    <div className="row card-footer bg-secondary d-flex justify-content-evenly">
+                        { todos.todos[0] ? (
                             todos.todos.map((todo) => {
                                 return (
                                     <Todo key={todo.id} todo={todo} handleDone={handleDone} handleRemove={handleRemove}/>
                                 )
                             })
-                        ) : <Spinner />}
+                        ) : <Spinner /> }
                     </div>
             </div>
         </React.Fragment>
