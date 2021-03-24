@@ -22,15 +22,18 @@ const quoteSlice = createSlice({
         }
     },
     extraReducers: {
+        // eslint-disable-next-line
         ['quote/getAsync/pending']: (state,action) => {
             state.isLoading = true;
             state.hasError = false;
         },
+        // eslint-disable-next-line
         ['quote/getAsync/fulfilled']: (state,action) => {
             state.isLoading = false;
             state.hasError = false;
             state.quote = action.payload;
         },
+        // eslint-disable-next-line
         ['quote/getAsync/rejected']: (state,action) => {
             state.isLoading = false;
             state.hasError = true;

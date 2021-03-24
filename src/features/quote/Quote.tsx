@@ -16,8 +16,8 @@ export default function Quote() {
     return (
         <React.Fragment>
             {quote.quote.contents ? (
-                <div className="quote position-absolute start-50 bottom-0 translate-middle bg-secondary w-50 text-center rounded" style={{zIndex: 110, opacity: 0.8}}>
-                    <p className="text-center text-white mb-1 mt-2 fs-4">{quote.quote.contents.quotes[0].quote}</p>
+                <div className="quote position-absolute start-50 bottom-0 translate-middle bg-secondary w-50 overflow-auto text-center rounded px-3" style={{zIndex: 110, opacity: 0.8, maxHeight: '7rem'}}>
+                    <p className="text-center text-white mb-1 mt-1 fs-4">{quote.quote.contents.quotes[0].quote}</p>
                     <p className="text-center text-white">{quote.quote.contents.quotes[0].author}</p>
                 </div>
             ) : (

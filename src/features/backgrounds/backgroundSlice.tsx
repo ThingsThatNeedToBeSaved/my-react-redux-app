@@ -22,15 +22,18 @@ const backgroundSlice = createSlice({
         }
     },
     extraReducers: {
+        // eslint-disable-next-line
         ['background/getAsync/pending']: (state,action) => {
             state.isLoading = true;
             state.hasError = false;
         },
+        // eslint-disable-next-line
         ['background/getAsync/fulfilled']: (state,action) => {
             state.isLoading = false;
             state.hasError = false;
             state.backgrounds = action.payload;
         },
+        // eslint-disable-next-line
         ['background/getAsync/rejected']: (state,action) => {
             state.isLoading = false;
             state.hasError = true;

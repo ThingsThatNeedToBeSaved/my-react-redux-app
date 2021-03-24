@@ -31,7 +31,12 @@ const todosSlice = createSlice({
             state.todos.push(action.payload);
         },
         removeTodo: (state,action) => {
-            state.todos.filter(({id}) => id !== action.payload.id);
+            const newState = state.todos.filter(({id}) => id !== action.payload.id);
+            state.todos = newState;
+        },
+        doneTodo: (state,action) => {
+            const todoIndex = state.todos.findIndex(({id}) => id === action.payload.id);
+            state.todos[todoIndex] = action.payload;
         }
     }
 });
@@ -49,5 +54,5 @@ interface State {
 }
 
 export const selectTodos = (state: State) => state.todos;
-export const { addTodo, removeTodo } = todosSlice.actions;
+export const { addTodo, doneTodo, removeTodo } = todosSlice.actions;
 export default todosSlice.reducer;

@@ -22,15 +22,18 @@ const weatherSlice = createSlice({
         }
     },
     extraReducers: {
+        // eslint-disable-next-line
         ['weather/getAsync/pending']: (state,action) => {
             state.isLoading = true;
             state.hasError = false;
         },
+        // eslint-disable-next-line
         ['weather/getAsync/fulfilled']: (state,action) => {
             state.isLoading = false;
             state.hasError = false;
             state.weather = action.payload;
         },
+        // eslint-disable-next-line
         ['weather/getAsync/rejected']: (state,action) => {
             state.isLoading = false;
             state.hasError = true;
